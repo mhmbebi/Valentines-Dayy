@@ -85,7 +85,7 @@
     <p>Hii bebi,</p>
     <p>Hii bebii you're so cute, gorgeous and I adore you so much!!. I made this specially just for you ^^, will you be my valentine this incoming February 14th? although I know that you will be attending an event I wanted to ask you anyway :p.</p>
     <p>Here are some reasons why:</p>
-    <ul style="list-style: none; padding: 0;">
+    <ul id="reasonsList" style="list-style: none; padding: 0;">
         <li>• You're amazing and make me smile every day.</li>
         <li>• You're not afraid to show who you really are.</li>
         <li>• You're a good friend.</li>
@@ -157,13 +157,35 @@
     
     <div class="response">
         <p>So, what do you say?</p>
- <!-- Customizable Image 3: Replace with another image, like a heart or memory -->
-    <img src="images/muach.gif" alt="Muach Image">
-    </div>
+        <!-- Customizable Image 3: Replace with another image, like a heart or memory -->
+        <img src="images/muach.gif" alt="Muach Image">
         <button onclick="alert('Yayyyyy!💜')">Yes, I'll be your Valentine</button>
     </div>
     
     <script>
+        // Function to reorganize list items by text length
+        function reorganizeListByLength(listId, sortOrder = 'asc') {
+            const list = document.getElementById(listId);
+            if (!list) return;  // Safety check
+            
+            const items = Array.from(list.children);  // Get all <li> elements
+            
+            // Sort by the length of the text content (ignoring HTML tags/emojis for display)
+            items.sort((a, b) => {
+                const lenA = a.textContent.trim().length;
+                const lenB = b.textContent.trim().length;
+                return sortOrder === 'asc' ? lenA - lenB : lenB - lenA;
+            });
+            
+            // Reorder the list
+            items.forEach(item => list.appendChild(item));
+        }
+        
+        // Run on page load: Sort the list with ID 'reasonsList' (longest to shortest)
+        window.addEventListener('DOMContentLoaded', () => {
+            reorganizeListByLength('reasonsList', 'desc');  // Changed to 'desc' for longest to shortest
+        });
+        
         // Simple JavaScript for interactivity (optional: you can remove if not needed)
         document.querySelector('button').addEventListener('click', function() {
             this.textContent = 'Thank you! 💜';
@@ -171,6 +193,4 @@
         });
     </script>
 </body>
-
 </html>
-
